@@ -52,9 +52,6 @@ class BeaverTronicsRobot(wpilib.TimedRobot):
 		self.ramp = Ramp()
 		self.shifters = Shifters()
 
-		#XXX back switch is no longer a subsystem, similar to arm motors
-		#self.b_limit = Back_Switch()
-
 		# instantiate Encoders for drivetrain?
 		#self.encoders = Encoders(self)
 
@@ -63,7 +60,6 @@ class BeaverTronicsRobot(wpilib.TimedRobot):
 		self.right_joy = wpilib.Joystick(1)
 		
 		# Instantiate Xbox
-		#XXX will probably look more like:
 		self.xbox = wpilib.Joystick(2)
 
 		# Instantiate OI; must be AFTER joysticks are inited
@@ -72,7 +68,7 @@ class BeaverTronicsRobot(wpilib.TimedRobot):
 		self.timer = wpilib.Timer()
 		self.loops = 0
 
-		# untested vision
+		# slightly untested vision
 		wpilib.CameraServer.launch("vision.py:main")
 		
 		
@@ -81,11 +77,9 @@ class BeaverTronicsRobot(wpilib.TimedRobot):
 		Scheduler.getInstance().removeAll()
 		# Set up encoders
 		# Loop counter to stop/start auto?
-		# Reset encoders (zero them) upon init
 		# Get Driverstation data from field
 
 		data = wpilib.DriverStation.getInstance().getGameSpecificMessage()
-		# Initialize pid variables
 
 		# Autonomous Scheduler
 		# self.autonomousCommand.start()
