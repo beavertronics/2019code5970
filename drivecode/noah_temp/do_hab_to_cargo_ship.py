@@ -15,7 +15,7 @@ class Do_HAB_To_Cargo_Ship(Command):
 	def initialize(self):
 		lookahead_distance = 18
 		acceleration = 75
-		trajectory = json.loads(open("hab_to_cargo_ship","r").read()))
+		trajectory = json.loads(open("hab_to_cargo_ship","r").read())
 		pure_pursuit = Pure_Pursuit(trajectory,lookahead_distance,acceleration)
 
 	def execute(self):

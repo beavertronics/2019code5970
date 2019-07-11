@@ -4,9 +4,9 @@ import wpilib
 from wpilib.command import Subsystem
 
 class Fourbar(Subsystem):
-	def __init__(self):
+	def __init__(self, robot):
 		super().__init__()
-		self.solenoid = wpilib.solenoid(3)
+		self.solenoid = wpilib.Solenoid(3)
 
 	def extend(self):
 		self.solenoid.set(True)

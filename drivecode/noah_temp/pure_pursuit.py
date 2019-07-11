@@ -30,7 +30,7 @@ which will pass in the encoder value change and the gyro heading value
 
 import math
 
-class Pure_Pursuit_Controller():
+class Pure_Pursuit():
     #create an instance of this class when you want to run the auton routine
     def __init__(self,trajectory,num_points,lookahead_distance,acceleration):
         #last_index is the index of the closest point to the robot
@@ -105,7 +105,7 @@ class Pure_Pursuit_Controller():
         
         #intermediary values
         a = -math.tan(robot_heading)
-        c = math.tan(robot_heading)*self.robot_location[0]-self.robot_location[1]
+        c=math.tan(robot_heading)*self.robot_location[0]-self.robot_location[1]
         d = math.sqrt(math.pow(a,2.0) + 1)
         x = abs(a*lookahead[0] + lookahead[1] + c)/d
         
@@ -119,16 +119,16 @@ class Pure_Pursuit_Controller():
         
         #assuming that the arc isn't basically straight
         if curvature > .1:
-            curve_limited_velocity,radius,alpha = self.calc_target_velocity(index,
-                                                               robot_heading,curvature)
+            crv_lmtd_speed,radius,alpha = self.calc_target_velocity(
+                    index,robot_heading,curvature)
             
         #if arc is nearly straight, curve doesn't limit velocity
         else:
-            curve_limited_velocity,radius,alpha = self.trajectory[5][self.last_index]
+            crv_lmtd_speed,radius,alpha = self.trajectory[5][self.last_index]
         limited_velocity = math.sqrt(math.pow(self.current_velocity,2.0)+
                           2*self.acceleration*self.step_size)
         
-        return min(limited_velocity,curve_limited_velocity),radius,alpha
+        return min(limited_velocity,crv_lmtd_speed),radius,alpha
     
     #calculate maximum target velocity from curvature
     def calc_target_velocity(self,index,robot_angle,curvature):
@@ -167,7 +167,7 @@ class Pure_Pursuit_Controller():
         return left_velocity,right_velocity
     def controller(self,x,y,robot_heading):
         self.robot_location = [x,y]
-		distances = self.find_closest_point
+        distances = self.find_closest_point
         lookahead_index = self.find_lookahead_point(distances)
         target_velocity,radius,alpha = self.rate_limiter(lookahead_index,
                                                          robot_heading)

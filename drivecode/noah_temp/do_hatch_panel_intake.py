@@ -2,7 +2,8 @@
 
 import wpilib
 from wpilib.command import Command
-from wpilib.command.WaitCommand import WaitCommand
+
+import time
 
 class Do_Hatch_Panel_Intake(Command):
 	def __init__(self, robot):
@@ -14,7 +15,7 @@ class Do_Hatch_Panel_Intake(Command):
 	def initialize(self):
 		self.beak.close()
 		self.fourbar.extend()
-		WaitCommand(1)
+		time.sleep(1)
 		self.beak.close()
 		self.fourbar.retract()
 

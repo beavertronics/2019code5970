@@ -4,7 +4,7 @@ import wpilib
 from wpilib.command import Subsystem
 
 class Beak(Subsystem):
-	def __init__(self):
+	def __init__(self, robot):
 		super().__init__()
 		self.solenoid = wpilib.Solenoid(2)
 	

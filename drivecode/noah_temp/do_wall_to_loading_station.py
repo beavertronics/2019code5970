@@ -14,7 +14,7 @@ class Do_Wall_To_Loading_Station(Command):
 	def initialize(self):
 		lookahead_distance = 18
 		acceleration = 75
-		trajectory = json.loads(open("wall_to_loading_station","r").read()))
+		trajectory = json.loads(open("wall_to_loading_station","r").read())
 		pure_pursuit = Pure_Pursuit(trajectory,lookahead_distance,acceleration)
 
 	def execute(self):

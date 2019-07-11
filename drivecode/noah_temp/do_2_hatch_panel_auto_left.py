@@ -2,7 +2,6 @@
 
 import wpilib
 from wpilib.command.commandgroup import CommandGroup
-from wpilib.command.WaitCommand import WaitCommand
 
 from do_hatch_panel_intake import Do_Hatch_Panel_Intake
 from do_hatch_panel_release import Do_Hatch_Panel_Release
@@ -13,7 +12,7 @@ from do_loading_station_to_wall import Do_Loading_Station_To_Wall
 from do_wall_to_cargo_ship import Do_Wall_To_Cargo_Ship
 
 
-class 2_Hatch_Panel_Auto_Left(CommandGroup):
+class Do_2_Hatch_Panel_Auto_Left(CommandGroup):
 	def __init__(self):
 		super().__init__()
 

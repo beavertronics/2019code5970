@@ -2,6 +2,7 @@
 
 import wpilib
 from wpilib.command.subsystem import Subsystem
+from wpilib.drive import DifferentialDrive
 
 from left_motors import Left_Motors
 from right_motors import Right_Motors
@@ -13,7 +14,7 @@ class Drivetrain(Subsystem):
 		super().__init__()
 
 		left_motors_instance = Left_Motors()
-		right_motors_instanec = Right_Motors()
+		right_motors_instance = Right_Motors()
 		self.left_motors = left_motors_instance.left_motor_group
 		self.right_motors = right_motors_instance.right_motor_group
 
@@ -26,9 +27,8 @@ class Drivetrain(Subsystem):
 
 		self.robot_instance = robot
 
-		self.drive = self.set_drivetrain_type(DifferentialDrive,
-			self.left_motors, self.right_motors)
-
+		self.drive = DifferentialDrive(self.left_motors,
+									self.right_motors)
 		self.gyro.reset()
 
 		self.x = 0
@@ -38,15 +38,13 @@ class Drivetrain(Subsystem):
 		self.last_left_encoder_distance = 0
 		self.last_right_encoder_distance = 0
 
-	def set_drivetrain_type(self, drivetrain_type, left_motors, right_motors):
-		drive = drivetrain_type(left_motors, right_motors)
-		return drive
-
-	def set_tank_speed(self, left_speed, right_speed, drive=DifferentialDrive):
-		drive.tankDrive(left_speed, right_speed)
+	def set_tank_speed(self, left_speed, right_speed):
+		self.left_motors.set(left_speed)
+		self.right_motors.set(right_speed)
 
 	def stop(self):
-		self.drive.tankDrive(0,0)
+		self.left_motors.set(0)
+		self.right_motors.set(0)
 	
 	def reset_encoders(self):
 		self.right_encoder.reset()
