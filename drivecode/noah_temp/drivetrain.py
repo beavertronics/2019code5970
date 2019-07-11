@@ -18,6 +18,9 @@ class Drivetrain(Subsystem):
 		self.left_motors = left_motors_instance.left_motor_group
 		self.right_motors = right_motors_instance.right_motor_group
 
+		self.left_shifter = wpilib.Solenoid(0)
+		self.right_shifter = wpilib.Solenoid(1)
+
 		self.left_encoder = wpilib.Encoder(2,3)
 		self.right_encoder = wpilib.Encoder(4,5)
 		self.left_encoder.setDistancePerPulse(distance_per_pulse)
@@ -63,3 +66,11 @@ class Drivetrain(Subsystem):
 		self.heading = math.radians(self.gyro.getAngle()) + math.pi/2
 		self.x += math.cos(heading) * center_displacement
 		self.y += math.sin(heading) * center_displacement
+
+	def shift_low(self):
+		self.left_shifter.set(False)
+		self.right_shifter.set(False)
+
+	def shift_high(self):
+		self.left_shifter.set(True)
+		self.right_shifter.set(True)

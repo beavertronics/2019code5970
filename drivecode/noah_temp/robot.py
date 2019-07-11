@@ -37,6 +37,7 @@ class BeaverTronicsRobot(wpilib.TimedRobot):
 		Sheduler.getInstance().removeAll()
 		data = wpilib.DriverStation.getInstane().getGameSpecificMessage()
 		self.do_2_hatch_panel_auto_left.start()
+		self.drivetrain.shift_low()
 	def autonomousPeriodic(self):
 		Scheduler.getInstance().run()
 	def teleopInit(self):
